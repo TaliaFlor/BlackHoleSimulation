@@ -27,7 +27,7 @@ public class InicialController implements Initializable {
     @FXML 
     private void showInfoView(ActionEvent event) throws IOException {
         
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/Views/Info_View.fxml"));
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../fxmls/Info_View.fxml"));
         // Define fmxl's controller
         //fxmlloader.setController(new BoardController());
 

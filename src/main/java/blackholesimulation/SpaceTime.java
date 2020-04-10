@@ -24,7 +24,7 @@ public class SpaceTime extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("/Views/Inicial_View.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("view/fxmls/Inicial_View.fxml"));
 
 		Scene scene = new Scene(root);
 
