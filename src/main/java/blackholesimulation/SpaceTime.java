@@ -1,5 +1,9 @@
 package blackholesimulation;
 
+import blackholesimulation.space.BlackHole;
+import blackholesimulation.spaceobjects.Asteroid;
+import blackholesimulation.spaceobjects.Planet;
+import javafx.geometry.Point2D;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -10,9 +14,9 @@ import javafx.stage.Stage;
 
 public class SpaceTime extends Application {
 	
-	private static final Point2D SPEED= new Point2D(3,5);
-    private static final Point2D POSITION = new Point2D(2,10);
-    private static final double MASS= 1000;
+    private static final Point2D SPEED= new Point2D(-50,50);
+    private static final Point2D POSITION = new Point2D(100,100);
+    private static final double MASS= 10;
     
     
 
@@ -32,13 +36,15 @@ public class SpaceTime extends Application {
         */
         int cont=0;
         
-        BlackHole blackHole = new BlackHole(new Point2D(10,10),100000);
+        BlackHole blackHole = new BlackHole(new Point2D(2,10),10000000);
         
         Asteroid asteroid = new Asteroid(POSITION, SPEED, MASS);
+        Planet planet = new Planet(POSITION, SPEED, MASS);
        
-        while(cont<10){
-        blackHole.pull(asteroid);
-        cont++;
+        boolean sugado = false;
+        while(sugado == false){
+            sugado = blackHole.pull(asteroid);
+            
         }
        
        
