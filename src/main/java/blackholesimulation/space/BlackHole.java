@@ -25,7 +25,7 @@ public class BlackHole {
 	 * <blockquote>
 	 * <p>
 	 * Real value:
-	 * {@code 6.67408 × 10^(-11) m^3/(kg * s^2) ---> 0.0000000000667408 m^3/(kg * s^2)}
+	 * {@code 6.67408 Ã— 10^(-11) m^3/(kg * s^2) ---> 0.0000000000667408 m^3/(kg * s^2)}
 	 * </p>
 	 * <blockquote>
 	 * 
@@ -44,14 +44,15 @@ public class BlackHole {
 	 * </p>
 	 *  <blockquote>
 	 * <p>
-	 * Formula: {@code (2 × G × m) / c^2 meters}
+	 * Formula: {@code (2 Ã— G Ã— m) / c^2 meters}
 	 * </p>
 	 * <p>
-	 * Simplified for the standards values: {@code m × 1.48428 × 10^(-27) meters}
+	 * Simplified for the standards values: {@code m Ã— 1.48428 Ã— 10^(-27) meters}
 	 * </p>
 	 * <blockquote>
 	 */
 	private double rs;
+        private double accretionDisk;
 	
 	
 
@@ -78,6 +79,7 @@ public class BlackHole {
 		this.mass = mass;
 //		this.rs = mass * 1.48428 * Math.pow(10, -27); // metros
 		this.rs = (2 * UNIVERSAL_GRAVITATIONAL_CONSTANT * mass) / Math.pow(Photon.SPEED_OF_LIGHT, 2); // metros
+                this.accretionDisk = this.rs * 3;
 	}
 	
 	
@@ -128,14 +130,14 @@ public class BlackHole {
 		 * photon.vel.setMag(c); -- ta faltando
 		 */
 
-		Point2D force = body.getPosition().subtract(this.position); // Vetor de direção do buraco negro
+		Point2D force = body.getPosition().subtract(this.position); // Vetor de direÃ§Ã£o do buraco negro
 		double direction = force.angle(this.position);
 		double displacement = force.magnitude(); // r
 		double gravitationalForce = (UNIVERSAL_GRAVITATIONAL_CONSTANT * this.mass) / (displacement * displacement);
 
 		double bodyDirection = body.getPosition().subtract(this.position).angle(body.getPosition());
 		double deltaDirection = (-gravitationalForce * (DELTA_TIME / Photon.SPEED_OF_LIGHT)
-				* Math.sin(bodyDirection - direction)); // a direção que o vetor a ponta, formando um entre o x
+				* Math.sin(bodyDirection - direction)); // a direÃ§Ã£o que o vetor a ponta, formando um entre o x
 														// caartesiano e o vetor princiapl
 
 		deltaDirection /= Math.abs(Math.pow(displacement, -1) - this.rs);
@@ -147,20 +149,25 @@ public class BlackHole {
 		body.setPosition(body.getPosition().subtract(body.getSpeed()));
 		System.out.println("body position:" + body.getPosition());
 		System.out.println("vel: " + body.getSpeed());
-		System.out.println("body Direction:" + bodyDirection);
+                System.out.printf("body Direction: %.4f \n",bodyDirection);
 		System.out.println();
 		System.out.println("black hole position: " + this.position);
 		System.out.println("black hole mass: " + this.mass);
 		System.out.println();
 
-		System.out.println("black hole distance: " + (this.position.distance(body.getPosition()) + this.rs));
+		System.out.println("black hole distance: " + (this.position.distance(body.getPosition())));
+                System.out.println("event horizon: " + this.rs);
 
 		System.out.println("-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=");
 
-		if (displacement <= this.getInnermostStableCircularOrbit() + 0.5) {
+		if (displacement <= this.rs + 0.5) {
 			System.out.println("STOP");
 			return true;
 		}
+                if(Double.isInfinite(this.position.distance(body.getPosition()))){
+                    System.out.println("escapou");
+                    return true;
+                }
 		return false;
 	}
 
