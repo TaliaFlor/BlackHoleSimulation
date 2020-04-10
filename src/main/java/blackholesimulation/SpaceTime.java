@@ -14,8 +14,8 @@ import javafx.stage.Stage;
 
 public class SpaceTime extends Application {
 	
-    private static final Point2D SPEED= new Point2D(-50,50);
-    private static final Point2D POSITION = new Point2D(100,100);
+    private static final Point2D SPEED= new Point2D(5,5);
+    private static final Point2D POSITION = new Point2D(80000,10);
     private static final double MASS= 10;
     
     
