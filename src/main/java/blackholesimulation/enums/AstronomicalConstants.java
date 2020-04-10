@@ -4,7 +4,7 @@ public enum AstronomicalConstants {
 
 	/**
 	 * <p>
-	 * The speed of light (<b>C</b>) is the speed at which light travels in a
+	 * The speed of light (<b>c</b>) is the speed at which light travels in a
 	 * vacumn.
 	 * </p>
 	 * 

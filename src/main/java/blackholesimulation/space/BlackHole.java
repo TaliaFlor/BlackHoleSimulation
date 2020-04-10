@@ -14,7 +14,7 @@ import javafx.geometry.Point2D;
  *
  */
 public class BlackHole {
-	
+
 	/**
 	 * <p>
 	 * The universal gravitational constant (<b>G</b>) is a physical constant
@@ -25,16 +25,14 @@ public class BlackHole {
 	 * <blockquote>
 	 * <p>
 	 * Real value:
-	 * {@code 6.67408 Ã— 10^(-11) m^3/(kg * s^2) ---> 0.0000000000667408 m^3/(kg * s^2)}
+	 * {@code 6.67408 × 10^(-11) m^3/(kg * s^2) ---> 0.0000000000667408 m^3/(kg * s^2)}
 	 * </p>
 	 * <blockquote>
 	 * 
 	 */
-	// public static final double UNIVERSAL_GRAVITATIONAL_CONSTANT =
-	// 6.67408*Math.pow(10, -11);
+	// public static final double UNIVERSAL_GRAVITATIONAL_CONSTANT = 6.67408 * Math.pow(10, -11);
 	public static final double UNIVERSAL_GRAVITATIONAL_CONSTANT = 3.54;
 	private static final double DELTA_TIME = 0.1;
-	
 
 	private Point2D position;
 	private double mass;
@@ -42,17 +40,16 @@ public class BlackHole {
 	 * <p>
 	 * The Schwarzschild radius i.e. the radius of the event horizon
 	 * </p>
-	 *  <blockquote>
+	 * <blockquote>
 	 * <p>
-	 * Formula: {@code (2 Ã— G Ã— m) / c^2 meters}
+	 * Formula: {@code (2 × G × m) / c^2 meters}
 	 * </p>
 	 * <p>
-	 * Simplified for the standards values: {@code m Ã— 1.48428 Ã— 10^(-27) meters}
+	 * Simplified for the standards values: {@code m × 1.48428 × 10^(-27) meters}
 	 * </p>
 	 * <blockquote>
 	 */
 	private double rs;
-        private double accretionDisk;
 	
 	
 
@@ -79,7 +76,6 @@ public class BlackHole {
 		this.mass = mass;
 //		this.rs = mass * 1.48428 * Math.pow(10, -27); // metros
 		this.rs = (2 * UNIVERSAL_GRAVITATIONAL_CONSTANT * mass) / Math.pow(Photon.SPEED_OF_LIGHT, 2); // metros
-                this.accretionDisk = this.rs * 3;
 	}
 	
 	
@@ -117,91 +113,72 @@ public class BlackHole {
 
 	public boolean pull(MassiveBody body) {
 
-		/*
-		 * 
-		 * p5.Vector.sub(this.pos, photon.pos); const theta = force.heading(); const r =
-		 * force.mag(); const fg = G * this.mass / (r * r);
-		 * 
-		 * let deltaTheta = -fg * (dt / c) * sin(photon.theta - theta); deltaTheta /=
-		 * abs(1.0 - 2.0 * G * this.mass / (r * c * c)); photon.theta += deltaTheta;
-		 * 
-		 * photon.vel = p5.Vector.fromAngle(photon.theta);
-		 * 
-		 * photon.vel.setMag(c); -- ta faltando
-		 */
-
-		Point2D force = body.getPosition().subtract(this.position); // Vetor de direÃ§Ã£o do buraco negro
+		Point2D force = body.getPosition().subtract(this.position); // Black hole direction vector
 		double direction = force.angle(this.position);
 		double displacement = force.magnitude(); // r
 		double gravitationalForce = (UNIVERSAL_GRAVITATIONAL_CONSTANT * this.mass) / (displacement * displacement);
 
 		double bodyDirection = body.getPosition().subtract(this.position).angle(body.getPosition());
-		double deltaDirection = (-gravitationalForce * (DELTA_TIME / Photon.SPEED_OF_LIGHT)
-				* Math.sin(bodyDirection - direction)); // a direÃ§Ã£o que o vetor a ponta, formando um entre o x
-														// caartesiano e o vetor princiapl
+		double deltaDirection = - (gravitationalForce * DELTA_TIME
+				* Math.sin(bodyDirection - direction)) / Photon.SPEED_OF_LIGHT; // The direction the vector points, i.e., the angle formed
+														// between the Cartesian X and the vector itself
 
 		deltaDirection /= Math.abs(Math.pow(displacement, -1) - this.rs);
 
 		double bodyMagnitude = body.getPosition().subtract(this.position).magnitude();
 		bodyDirection = bodyDirection + deltaDirection;
-		body.setSpeed(createVector(bodyDirection, bodyMagnitude));
-		// body.setPosition(body.getSpeed());
+		body.setSpeed(createVectorFromAngle(bodyDirection, bodyMagnitude));
 		body.setPosition(body.getPosition().subtract(body.getSpeed()));
+
+		// Console output
 		System.out.println("body position:" + body.getPosition());
 		System.out.println("vel: " + body.getSpeed());
-                System.out.printf("body Direction: %.4f \n",bodyDirection);
+		System.out.printf("body Direction: %.4f \n", bodyDirection);
 		System.out.println();
 		System.out.println("black hole position: " + this.position);
 		System.out.println("black hole mass: " + this.mass);
 		System.out.println();
 
 		System.out.println("black hole distance: " + (this.position.distance(body.getPosition())));
-                System.out.println("event horizon: " + this.rs);
+		System.out.println("event horizon: " + this.rs);
 
 		System.out.println("-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=");
 
+		// Stop conditions
 		if (displacement <= this.rs + 0.5) {
-			System.out.println("STOP");
+			System.out.println("Fell into the black hole");
 			return true;
 		}
-                if(Double.isInfinite(this.position.distance(body.getPosition()))){
-                    System.out.println("escapou");
-                    return true;
-                }
+		if (Double.isInfinite(this.position.distance(body.getPosition()))) {
+			System.out.println("Escaped to infinity");
+			return true;
+		}
+
 		return false;
-	}
 
-	private Point2D createVector(double angle, double magnitude) {
-		double x = (Math.cos(angle) * magnitude);
-		double y = (Math.sin(angle) * magnitude);
-
-		return new Point2D(x, y);
-
-	}
-
-	public double distance(MassiveBody body) {
-		/*
-		 * distancia = Math.pow(jogadorY - inimigoY,2) + Math.pow(jogadorX -
-		 * inimigoX,2);
-		 * 
-		 * distancia = Math.sqrt(distancia);
-		 * 
-		 * if(distancia <= jogadorRaio + inimigoRaio){ fimJogo = true; } }
-		 */
-
-		double distance = Math.pow(body.getPosition().getX() - this.position.getX(), 2)
-				+ Math.pow(body.getPosition().getY() - this.position.getY(), 2);
-		distance = Math.sqrt(distance);
-		System.out.println("distance: " + distance);
-		/*
-		 * if(distance <= this.rs + 1000){
-		 * System.out.println("sugado pelo buraco negro"); return true; } return false;
-		 */
-		return distance;
 	}
 	
+	/**
+	 * <p>
+	 * Creates a new Point2D object from a given angle and magnitude. Equivalent to,
+	 * if it existed {@code new Point2D(angle, magnitude)}.
+	 * </p>
+	 * 
+	 * @param angle     the angle of the new vector
+	 * @param magnitude the magnitude of the vector
+	 * @return a new Point2D object with the given angle and magnitude
+	 */
+	private Point2D createVectorFromAngle(double angle, double magnitude) {
+		double x = Math.cos(angle) * magnitude;
+		double y = Math.sin(angle) * magnitude;
+
+		return new Point2D(x, y);
+	}
 
 	public double getDeltaTime() { return DELTA_TIME; }
+	
+	
+	// Black hole structures
 
 	public double getPhotonSphere() { return rs * 1.5; }
 
@@ -216,7 +193,7 @@ public class BlackHole {
 
 	public double getPhotonScapeDistance() { return rs * 2.6; }
 	
-	
+
 	// Getters e setters
 
 	public Point2D getPosition() { return position; }

@@ -26,7 +26,7 @@ public class Photon {
 	 * 
 	 */
 //	public final static double SPEED_OF_LIGHT = 299792458;
-	public final static double SPEED_OF_LIGHT = 300; // Arredondar para 30 ou 300 milhões m/s
+	public final static double SPEED_OF_LIGHT = 30; // Arredondar para 30 ou 300 milhões m/s
 
 	private Point2D position;
 	
