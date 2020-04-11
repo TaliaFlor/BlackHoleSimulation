@@ -24,7 +24,7 @@ public class InfoController implements Initializable {
     @FXML
     private void backInicialView(ActionEvent event) throws IOException {
         
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../fxmls/Inicial_View.fxml"));
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/Views/Inicial_View.fxml"));
         // Define fmxl's controller
         //fxmlloader.setController(new BoardController());
 
@@ -41,6 +41,10 @@ public class InfoController implements Initializable {
        
     }
 
+}
+
+
+   
 }
 
 
