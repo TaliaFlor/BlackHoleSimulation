@@ -40,9 +40,21 @@ public class InicialController implements Initializable {
     }
     
     
+   
+    
+    
      @FXML
-    void showSimulationView(ActionEvent event) {
-        
+    void showSimulationView(ActionEvent event) throws IOException {
+         
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/Views/Simulation_View.fxml"));
+       
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Load fxml on scene
+        stage.setTitle("Info");
+        stage.setScene(new Scene(fxmlloader.load()));
+        stage.show();
         
 
     }
@@ -57,5 +69,8 @@ public class InicialController implements Initializable {
     
     
    
+    
+
+
     
 

@@ -4,15 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320"
-	xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
-	fx:controller="blackholesimulation.controllers.InicialController">
-	<children>
-		<Button fx:id="playButton" layoutX="140.0" layoutY="64.0"
-			onAction="#showSimulationView" text="Play" />
-		<Label fx:id="label" layoutX="126" layoutY="120" minHeight="16"
-			minWidth="69" />
-		<Button fx:id="infoButton" layoutX="141.0" layoutY="107.0"
-			onAction="#showInfoView" text="Info" />
-	</children>
+<AnchorPane id="AnchorPane" prefHeight="800" prefWidth="800" styleClass="anchor" stylesheets="@HomeScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="blackholesimulation.controllers.InicialController">
+    <children>
+        <Button fx:id="playButton" layoutX="358.0" layoutY="433.0" onAction="#showSimulationView" prefHeight="24.0" prefWidth="131.0" text="START" />
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <Button fx:id="infoButton" layoutX="358.0" layoutY="505.0" onAction="#showInfoView" prefHeight="26.0" prefWidth="131.0" text="INFO" />
+    </children>
 </AnchorPane>
