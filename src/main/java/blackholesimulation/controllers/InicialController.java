@@ -13,64 +13,46 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-
 public class InicialController implements Initializable {
-    
-    @FXML
-    private Label label;
-    
-    @FXML
-    private Button Info;
-    @FXML
-    private Button play;
 
-    @FXML 
-    private void showInfoView(ActionEvent event) throws IOException {
-        
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/fxmls/Info_View.fxml"));
-        // Define fmxl's controller
-        //fxmlloader.setController(new BoardController());
+	@FXML
+	private Label label;
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	@FXML
+	private Button Info;
+	@FXML
+	private Button play;
 
-        // Load fxml on scene
-        stage.setTitle("Info");
-        stage.setScene(new Scene(fxmlloader.load()));
-        stage.show();
-    }
-    
-    
-   
-    
-    
-     @FXML
-    void showSimulationView(ActionEvent event) throws IOException {
-         
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/Views/Simulation_View.fxml"));
-       
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	}
 
-        // Load fxml on scene
-        stage.setTitle("Info");
-        stage.setScene(new Scene(fxmlloader.load()));
-        stage.show();
-        
+	@FXML
+	void showSimulationView(ActionEvent event) throws IOException {
 
-    }
+		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/fxmls/Simulation_View.fxml"));
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-      
-    }
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		// Load fxml on scene
+		stage.setTitle("Info");
+		stage.setScene(new Scene(fxmlloader.load()));
+		stage.show();
+
+	}
+
+	@FXML
+	private void showInfoView(ActionEvent event) throws IOException {
+
+		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/fxmls/Info_View.fxml"));
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		// Load fxml on scene
+		stage.setTitle("Info");
+		stage.setScene(new Scene(fxmlloader.load()));
+		stage.show();
+	}
 
 }
-
-    
-    
-   
-    
-
-
-    
-

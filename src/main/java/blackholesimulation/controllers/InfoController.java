@@ -15,40 +15,30 @@ import javafx.stage.Stage;
 
 public class InfoController implements Initializable {
 
-    @FXML
-    private Button button;
+	@FXML
+	private Button button;
 
-    @FXML
-    private Label label;
+	@FXML
+	private Label label;
 
-    @FXML
-    private void backInicialView(ActionEvent event) throws IOException {
-        
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/fxmls/Inicial_View.fxml"));
-        // Define fmxl's controller
-        //fxmlloader.setController(new BoardController());
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	}
 
-        // Load fxml on scene
-        stage.setTitle("Info");
-        stage.setScene(new Scene(fxmlloader.load()));
-        stage.show();
-    }
+	@FXML
+	private void backInicialView(ActionEvent event) throws IOException {
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-       
-    }
+		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/fxmls/Inicial_View.fxml"));
+		// Define fmxl's controller
+		// fxmlloader.setController(new BoardController());
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		// Load fxml on scene
+		stage.setTitle("Info");
+		stage.setScene(new Scene(fxmlloader.load()));
+		stage.show();
+	}
 
 }
-
-
-   
-
-
-    
-    
-   
-    
-
