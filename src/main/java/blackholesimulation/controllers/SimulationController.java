@@ -1,4 +1,4 @@
-package blackholesimulation.view.controllers;
+package blackholesimulation.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
