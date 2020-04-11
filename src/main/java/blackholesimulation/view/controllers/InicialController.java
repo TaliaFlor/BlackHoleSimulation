@@ -1,5 +1,4 @@
 package blackholesimulation.view.controllers;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,10 +26,8 @@ public class InicialController implements Initializable {
     @FXML 
     private void showInfoView(ActionEvent event) throws IOException {
         
-        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../fxmls/Info_View.fxml"));
-        // Define fmxl's controller
-        //fxmlloader.setController(new BoardController());
-
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/Views/Info_View.fxml"));
+       
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         // Load fxml on scene
@@ -40,9 +37,21 @@ public class InicialController implements Initializable {
     }
     
     
+   
+    
+    
      @FXML
-    void showSimulationView(ActionEvent event) {
-        
+    void showSimulationView(ActionEvent event) throws IOException {
+         
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/Views/Simulation_View.fxml"));
+       
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Load fxml on scene
+        stage.setTitle("Info");
+        stage.setScene(new Scene(fxmlloader.load()));
+        stage.show();
         
 
     }
@@ -57,5 +66,8 @@ public class InicialController implements Initializable {
     
     
    
+    
+
+
     
 
