@@ -4,13 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="362.0" prefWidth="499.0"
-	xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1"
-	fx:controller="blackholesimulation.view.controllers.InfoController">
-	<children>
-		<Button fx:id="button" layoutX="222.0" layoutY="294.0"
-			onAction="#backInicialView" text="Back" />
-		<Label fx:id="label" layoutX="126" layoutY="120" minHeight="16"
-			minWidth="69" />
-	</children>
+<AnchorPane id="AnchorPane" prefHeight="800" prefWidth="800" styleClass="anchor" stylesheets="@HomeScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InicialController">
+    <children>
+        <Button fx:id="playButton" layoutX="358.0" layoutY="433.0" onAction="#showSimulationView" prefHeight="24.0" prefWidth="131.0" text="START" />
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <Button fx:id="infoButton" layoutX="358.0" layoutY="505.0" onAction="#showInfoView" prefHeight="26.0" prefWidth="131.0" text="INFO" />
+    </children>
 </AnchorPane>
