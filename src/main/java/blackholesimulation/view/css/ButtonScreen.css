@@ -1,0 +1,14 @@
+/* Application buttons */
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    
+    -fx-background-color: linear-gradient(#6495ED, #9F79EE);
+    -fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 0.6), 5.0, 0.0, 0.0, 1.0);
+    -fx-border-radius: 2.0px;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#5D478B, #9932CC);
+}

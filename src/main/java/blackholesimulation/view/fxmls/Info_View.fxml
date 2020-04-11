@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="800" prefWidth="800"
-	styleClass="informacion" stylesheets="@../css/HomeScreen.css" xmlns="http://javafx.com/javafx/11.0.1"
+	styleClass="informacion" stylesheets="@../css/InfoScreen.css" xmlns="http://javafx.com/javafx/11.0.1"
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="blackholesimulation.controllers.InfoController">
 	<children>
 		<Button fx:id="button" layoutX="380.0" layoutY="599.0"
