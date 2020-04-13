@@ -49,12 +49,6 @@ public class BlackHole {
     private double rs;
 
 
-    /**
-     * <p>
-     * Creates a black hole on the origin (position (0, 0)) and mass of 100.000 kg
-     * </p>
-     */
-    public BlackHole() { this(new Point2D(0, 0), 100000); }
 
     /**
      * <p>
@@ -64,8 +58,6 @@ public class BlackHole {
      * @param mass the mass of the black hole (measured in kilograms)
      */
     public BlackHole(double mass) { this(new Point2D(0, 0), mass); }
-
-    public BlackHole(double x, double y, double mass) { this(new Point2D(x, y), mass); }
 
     public BlackHole(Point2D position, double mass) {
         this.position = position;
@@ -106,52 +98,60 @@ public class BlackHole {
     }
     
 
+    
+	public boolean pull(SpaceObject spaceObject) {
 
-    public boolean pull(MassiveBody body) {
+//		Point2D force = spaceObject.getPosition().subtract(this.position); // Black hole direction vector
+		Point2D force = position.subtract(spaceObject.getPosition());	// Black hole direction vector
+		double direction = force.angle(this.position) * (Math.PI / 180); // direction vector on radians
+		double displacement = force.magnitude();
+		double gravitationalForce = (UNIVERSAL_GRAVITATIONAL_CONSTANT * this.mass) / (displacement * displacement);
 
-        Point2D force = body.getPosition().subtract(this.position); // Black hole direction vector
-        double direction = force.angle(this.position);
-        double displacement = force.magnitude();
-        double gravitationalForce = (UNIVERSAL_GRAVITATIONAL_CONSTANT * this.mass) / (displacement * displacement);
+		double spaceObjectDirection = spaceObject.getPosition().subtract(this.position)
+				.angle(spaceObject.getPosition())  * (Math.PI / 180);
+		double deltaDirection = - (gravitationalForce * DELTA_TIME * Math.sin(spaceObjectDirection - direction))
+				/ Photon.SPEED_OF_LIGHT; // The direction the vector points
 
-        double bodyDirection = body.getPosition().subtract(this.position).angle(body.getPosition());
-        double deltaDirection = -(gravitationalForce * DELTA_TIME
-                * Math.sin(bodyDirection - direction)) / Photon.SPEED_OF_LIGHT; // The direction the vector points, i.e., the angle formed
-        // between the Cartesian X and the vector itself
+//		deltaDirection /= Math.abs(1 - ((2 * UNIVERSAL_GRAVITATIONAL_CONSTANT * mass) / (displacement * Math.pow(Photon.SPEED_OF_LIGHT, 2))));
+		deltaDirection /= Math.abs(1 - (rs / displacement));
+		
+		spaceObjectDirection += deltaDirection;
+		
+		double spaceObjectMagnitude = spaceObject.getPosition().subtract(this.position).magnitude();
+		spaceObject.setSpeed(createVectorFromAngle(spaceObjectDirection, spaceObjectMagnitude));
+		spaceObject.setPosition(spaceObject.getPosition().subtract(spaceObject.getSpeed()));
 
-        deltaDirection /= Math.abs(Math.pow(displacement, -1) - this.rs);
+		if (spaceObject instanceof Photon) {
+			spaceObject.setSpeed(new Point2D(Photon.SPEED_OF_LIGHT, Photon.SPEED_OF_LIGHT));
+		}
+		
+		// Console output
+		System.out.println("spaceObject position:" + spaceObject.getPosition());
+		System.out.println("vel: " + spaceObject.getSpeed());
+		System.out.printf("spaceObject Direction: %.4f \n", spaceObjectDirection);
+		System.out.println();
+		System.out.println("black hole position: " + this.position);
+		System.out.println("black hole mass: " + this.mass);
+		System.out.println();
 
-        double bodyMagnitude = body.getPosition().subtract(this.position).magnitude();
-        bodyDirection = bodyDirection + deltaDirection;
-        body.setSpeed(createVectorFromAngle(bodyDirection, bodyMagnitude));
-        body.setPosition(body.getPosition().subtract(body.getSpeed()));
+		System.out.println("black hole distance: " + (this.position.distance(spaceObject.getPosition())));
+		System.out.println("event horizon: " + this.rs);
 
-        // Console output
-        System.out.println("body position:" + body.getPosition());
-        System.out.println("vel: " + body.getSpeed());
-        System.out.printf("body Direction: %.4f \n", bodyDirection);
-        System.out.println();
-        System.out.println("black hole position: " + this.position);
-        System.out.println("black hole mass: " + this.mass);
-        System.out.println();
-
-        System.out.println("black hole distance: " + (this.position.distance(body.getPosition())));
-        System.out.println("event horizon: " + this.rs);
-
-        System.out.println("-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=");
-
-        // Stop conditions
-        if (displacement <= this.rs + 0.5) {
-            System.out.println("Fell into the black hole");
-            return true;
-        }
-        if (Double.isInfinite(this.position.distance(body.getPosition()))) {
-            System.out.println("Escaped to infinity");
-            return true;
-        }
-
-        return false;
-    }
+		System.out.println("-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=");
+		
+		// Stop conditions
+		if (this.position.distance(spaceObject.getPosition()) < this.rs) {
+			System.out.println("STOP");
+			return true;
+		}
+		if (Double.isInfinite(this.position.distance(spaceObject.getPosition()))) {
+			System.out.println("escapou");
+			return true;
+		}
+		
+		return false;
+		
+	}
     
 
     /**

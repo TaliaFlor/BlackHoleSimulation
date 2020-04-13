@@ -7,14 +7,13 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Ellipse?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="800"
-	prefWidth="800" styleClass="simulation" stylesheets="@../css/SimulationScreen.css"
-	xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="blackholesimulation.controllers.SimulationController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="950"
+	prefWidth="1400" styleClass="simulation" stylesheets="@../css/SimulationScreen.css"
+	xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Ellipse fx:id="accretionDisk" fill="#1e75bd00" layoutX="610.0"
-			layoutY="195.0" radiusX="115.0" radiusY="105.0" strokeType="OUTSIDE"
-			strokeWidth="10.0">
+		<Ellipse fx:id="accretionDisk" fill="#1e75bd00" layoutX="1075.0"
+			layoutY="261.0" radiusX="115.0" radiusY="105.0" strokeType="OUTSIDE"
+			strokeWidth="2.0">
 			<stroke>
 				<LinearGradient endX="1.0" endY="0.6374045801526718"
 					startX="0.6641221888192738" startY="1.0">
@@ -25,9 +24,8 @@
 				</LinearGradient>
 			</stroke>
 		</Ellipse>
-		<Ellipse fx:id="photonSphere" fill="#1e75bd00" layoutX="610.0"
-			layoutY="194.0" radiusX="62.0" radiusY="60.0" strokeType="OUTSIDE"
-			strokeWidth="5.0">
+		<Ellipse fx:id="photonSphere" fill="#1e75bd00" layoutX="1075.0"
+			layoutY="260.0" radiusX="62.0" radiusY="60.0" strokeType="OUTSIDE">
 			<stroke>
 				<LinearGradient endX="1.0" endY="0.6374045801526718"
 					startX="0.6641221888192738" startY="1.0">
@@ -40,7 +38,7 @@
 		</Ellipse>
 		<Button layoutX="590.0" layoutY="695.0" mnemonicParsing="false"
 			onAction="#back" text="Back" />
-		<Circle fx:id="eventHorizon" layoutX="610.0" layoutY="195.0"
+		<Circle fx:id="eventHorizon" layoutX="1075.0" layoutY="261.0"
 			radius="44.0" strokeType="INSIDE" strokeWidth="2.0">
 			<stroke>
 				<LinearGradient endX="0.8320610832622033" endY="0.5114504035192592"

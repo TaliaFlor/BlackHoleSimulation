@@ -7,7 +7,7 @@
 	styleClass="anchor" stylesheets="@../css/InicialScreen.css" xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="blackholesimulation.controllers.InicialController">
 	<children>
-		<Button layoutX="358.0" layoutY="433.0" onAction="#showSimulationView"
+		<Button layoutX="358.0" layoutY="433.0" onAction="#showOptionsView"
 			prefHeight="24.0" prefWidth="131.0" text="START" />
 		<Button layoutX="358.0" layoutY="505.0" onAction="#showInfoView"
 			prefHeight="26.0" prefWidth="131.0" text="INFO" />

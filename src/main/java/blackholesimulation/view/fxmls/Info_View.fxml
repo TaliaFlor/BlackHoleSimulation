@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="800" prefWidth="800"
-	styleClass="informacion" stylesheets="@../css/InfoScreen.css" xmlns="http://javafx.com/javafx/11.0.1"
+	styleClass="informacion" stylesheets="@../css/InfoScreen.css" xmlns="http://javafx.com/javafx/8.0.171"
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="blackholesimulation.controllers.InfoController">
 	<children>
-		<Button fx:id="button" layoutX="380.0" layoutY="599.0"
-			onAction="#backInicialView" text="Back" />
-		<Label fx:id="label" layoutX="126" layoutY="120" minHeight="16"
-			minWidth="69" />
+		<Button layoutX="380.0" layoutY="599.0" onAction="#backInicialView"
+			text="Back" />
 	</children>
 </AnchorPane>
