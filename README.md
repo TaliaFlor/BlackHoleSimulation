@@ -50,13 +50,13 @@ Accretion Disk = Rs * 3
 
 <p>Portuguese:</p>
 
-[Scicast #175: Buracos Negros](https://www.deviante.com.br/podcasts/scicast/scicast-175-buracos-negros/)
-[Nerdcast #670: O buraco negro é mais embaixo](https://jovemnerd.com.br/nerdcast/o-buraco-negro-e-mais-embaixo/)
+- [Scicast #175: Buracos Negros](https://www.deviante.com.br/podcasts/scicast/scicast-175-buracos-negros/)
+- [Nerdcast #670: O buraco negro é mais embaixo](https://jovemnerd.com.br/nerdcast/o-buraco-negro-e-mais-embaixo/)
 
 ### Extras:
 
 <p>Portuguese:</p>
 
-[Nerdcast #507: Einstein, Relatividade e Ondas Gravitacionais](https://jovemnerd.com.br/nerdcast/nerdcast-507-einstein-relatividade-e-ondas-gravitacionais/)
-[Scicast #218: Relatividade](https://www.deviante.com.br/podcasts/scicast/scicast-218-relatividade/)
-[Relatividade Geral (Scicast #321)](https://www.deviante.com.br/podcasts/scicast-321/)
+- [Nerdcast #507: Einstein, Relatividade e Ondas Gravitacionais](https://jovemnerd.com.br/nerdcast/nerdcast-507-einstein-relatividade-e-ondas-gravitacionais/)
+- [Scicast #218: Relatividade](https://www.deviante.com.br/podcasts/scicast/scicast-218-relatividade/)
+- [Relatividade Geral (Scicast #321)](https://www.deviante.com.br/podcasts/scicast-321/)
