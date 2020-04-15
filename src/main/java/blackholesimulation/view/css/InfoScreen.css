@@ -1,0 +1,5 @@
+@import url("ApplicationScreens.css");
+
+.informacion{
+     -fx-background-image:url('../images/infoScreen.png');
+}

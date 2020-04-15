@@ -1,0 +1,5 @@
+@import url("ApplicationScreens.css");
+
+.choice{
+     -fx-background-image:url('../images/optionsScreen.png');
+}

@@ -1,6 +1,9 @@
+
 package blackholesimulation.spaceobjects;
 
 import java.util.Objects;
+
+import blackholesimulation.space.SpaceObject;
 import javafx.geometry.Point2D;
 
 /**
@@ -8,7 +11,7 @@ import javafx.geometry.Point2D;
  * Representation of a photon of light on a 2D space.
  * </p>
  */
-public class Photon {
+public class Photon extends SpaceObject {
 
 	/**
 	 * <p>
@@ -26,9 +29,9 @@ public class Photon {
 	 * 
 	 */
 //	public final static double SPEED_OF_LIGHT = 299792458;
-	public final static double SPEED_OF_LIGHT = 300; // Arredondar para 30 ou 300 milhões m/s
+	public final static double SPEED_OF_LIGHT = 300; // Round to 30 or 300 millions m/s
 
-	private Point2D position;
+	
 	
 	
 	/**
@@ -39,21 +42,18 @@ public class Photon {
 	 * @param position position in space of the photon
 	 */
 	public Photon(Point2D position) {
-		this.position = position;
+		super(position, new Point2D(SPEED_OF_LIGHT, SPEED_OF_LIGHT));
 	}
 	
 	
 
 	@Override
 	public String toString() {
-		return String.format("Photon [position: %s]", position);
+		return String.format("Photon [position: %s]", getPosition());
 	}
 
 	@Override
-	public int hashCode() {
-		int hash = 3;
-		return hash;
-	}
+	public int hashCode() { return 3; }
 
 	@Override
 	public boolean equals(Object obj) {
@@ -67,16 +67,7 @@ public class Photon {
 			return false;
 		}
 		final Photon other = (Photon) obj;
-		return Objects.equals(this.position, other.position);
+		return Objects.equals(this.getPosition(), other.getPosition());
 	}
-	
-	
-	// Getters e setters
-
-	public Point2D getPosition() { return position; }
-
-	public void setPosition(Point2D position) { this.position = position; }
-
-	public double getSpeed() { return SPEED_OF_LIGHT; }
 
 }

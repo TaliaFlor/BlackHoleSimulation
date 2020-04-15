@@ -1,0 +1,6 @@
+@import url("ApplicationScreens.css");
+
+.simulation{
+      -fx-background-image:url('../images/universe.jpg');
+}
+
