@@ -40,6 +40,8 @@ public class SimulationController implements Initializable {
 	private SpaceObject spaceObject;
 	private Circle spaceObjectView;
 
+	private Circle blackCircle;
+
 	@FXML
 	private AnchorPane root;
 	@FXML
@@ -60,57 +62,47 @@ public class SimulationController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// Draw nodes on screen
-		showBlackHole();
-
 		if (spaceBody == SpaceBodies.ASTEROID) {
 			showAsteroid();
 		} else if (spaceBody == SpaceBodies.PLANET) {
 			showPlanet();
 		} else if (spaceBody == SpaceBodies.STAR) {
 			showStar();
-		} else if (spaceBody == SpaceBodies.PHOTON) {
-			showPhotons();
 		} else {
-			showAsteroid();
-			showPlanet();
-			showStar();
-		}
-		
+			showPhotons();
+		} 
+		showBlackHole();
+		showBlackCircle();
+
 		// Animate nodes
 		if (spaceBody != SpaceBodies.PHOTON) {
-			pullObject(spaceObjectView, spaceObject);
+			pullObject();
 		} else {
-			pullPhotons(spaceObjectViewArray, spaceObjectArray);
-//			Line superiorScapeLine = new Line(0, eventHorizon.getLayoutY() + blackHole.getPhotonScapeDistance(),
-//					root.getWidth(), eventHorizon.getLayoutY() + blackHole.getPhotonScapeDistance());
-//			superiorScapeLine.setFill(Color.WHITE);
-//			root.getChildren().add(superiorScapeLine);
+			pullPhotons();
 		}
-		
+
 	}
 	
 	
-	
+
 	// Button
 
 	@FXML
 	private void back(ActionEvent event) throws IOException {
-
-		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("/Views/Inicial_View.fxml"));
+		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("../view/fxmls/OptionsMenu_View.fxml"));
 
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		// Load fxml on scene
-		stage.setTitle("Info");
+		stage.setTitle("Options Menu");
 		stage.setScene(new Scene(fxmlloader.load()));
 		stage.show();
-
 	}
 	
-	
-	// Animation
 
-	private void pullObject(Circle spaceObjectView, SpaceObject spaceObject) {
+	// Animation
+	@FXML
+	private void pullObject() {
 		boolean goInfinity = false;
 		boolean beyondScreen = false;
 		while (!goInfinity && !beyondScreen) {
@@ -119,14 +111,20 @@ public class SimulationController implements Initializable {
 		}
 	}
 
-	private void pullPhotons(Circle[] spaceObjectViewArray, SpaceObject[] spaceObjectAray) {
+	private void pullPhotons() {
 		boolean goInfinity = false;
 		boolean beyondScreen = false;
+		boolean breakLoop = false;
 		while (!goInfinity && !beyondScreen) {
 			for (int i = 0; i < spaceObjectViewArray.length; i++) {
+				if (spaceObjectViewArray[i] == null) {
+					breakLoop = true;
+					break;
+				}
 				goInfinity = blackHole.pull(spaceObjectArray[i]);
 				beyondScreen = animation(spaceObjectViewArray[i], spaceObjectArray[i]);
 			}
+			if (breakLoop) { break; }
 		}
 	}
 
@@ -140,20 +138,25 @@ public class SimulationController implements Initializable {
 		timeline.getKeyFrames().add(keyFrame);
 
 		timeline.play();
-		
+
 		// Stop if node is outside screen
 		double width = root.getWidth();
 		double height = root.getHeight();
 		if (spaceObjectView.getCenterX() <= width || spaceObjectView.getCenterY() <= height) {
-			System.out.println("Beyond Screen");
+			System.out.println("Node is beyond screen");
 			return true;
 		}
 
 		return false;
 	}
 	
-	
+
 	// Draw nodes on screen
+
+	private void showBlackCircle() {
+		blackCircle = new Circle(948, 232, 54, Color.BLACK);
+		root.getChildren().add(blackCircle);
+	}
 
 	private void showBlackHole() {
 		eventHorizon.setRadius(blackHole.getRs());
@@ -166,8 +169,7 @@ public class SimulationController implements Initializable {
 	}
 
 	private void showAsteroid() {
-		spaceObjectView = new Circle(50, 650, 20, Color.web("#514531"));
-
+		spaceObjectView = new Circle(20, 650, 15, Color.web("#514531"));
 		spaceObject = new Asteroid(new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()),
 				new Point2D(2, 2), 100);
 
@@ -183,23 +185,24 @@ public class SimulationController implements Initializable {
 	}
 
 	private void showStar() {
-		spaceObjectView = new Circle(2, 750, 20, Color.web("#B8860B"));
+		spaceObjectView = new Circle(20, 350, 40, Color.web("#B8860B"));
 		spaceObject = new Star(new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()),
-				new Point2D(2, 2), 400);
+				new Point2D(2, 2), 2000);
 
 		root.getChildren().add(spaceObjectView);
 	}
 
 	private void showPhotons() {
 		for (int i = 0; i < spaceObjectArray.length; i++) {
-			Circle spaceObjectView = new Circle(50, ThreadLocalRandom.current().nextDouble(380, 750), 5,
+			Circle spaceObjectView = new Circle(50, ThreadLocalRandom.current().nextDouble(380, 750), 2.5,
 					Color.web("#F0FFFF"));
 			SpaceObject spaceObject = new Photon(
 					new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()));
+
 			spaceObjectViewArray[i] = spaceObjectView;
 			spaceObjectArray[i] = spaceObject;
-			root.getChildren().add(spaceObjectView);
 		}
+		root.getChildren().addAll(spaceObjectViewArray);
 	}
-
+	
 }

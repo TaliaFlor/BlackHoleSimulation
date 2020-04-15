@@ -20,7 +20,7 @@ public abstract class MassiveBody extends SpaceObject {
 
 	@Override
 	public String toString() {
-		return String.format("MassiveBody [position: %s, speed: %s, mass: %f]", getPosition(), getSpeed(), mass);
+		return String.format("MassiveBody [position: %s, speed: %s, mass: %f]", getPosition(), getVelocity(), mass);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public abstract class MassiveBody extends SpaceObject {
 			return false;
 		}
 		MassiveBody other = (MassiveBody) obj;
-		return mass == other.mass && Objects.equals(this.getSpeed(), other.getSpeed());
+		return mass == other.mass && Objects.equals(this.getVelocity(), other.getVelocity());
 	}
 	
 	

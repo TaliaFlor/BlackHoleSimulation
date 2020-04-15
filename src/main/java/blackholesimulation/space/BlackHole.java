@@ -101,14 +101,15 @@ public class BlackHole {
     
 	public boolean pull(SpaceObject spaceObject) {
 
-//		Point2D force = spaceObject.getPosition().subtract(this.position); // Black hole direction vector
 		Point2D force = position.subtract(spaceObject.getPosition());	// Black hole direction vector
 		double direction = force.angle(this.position) * (Math.PI / 180); // direction vector on radians
 		double displacement = force.magnitude();
 		double gravitationalForce = (UNIVERSAL_GRAVITATIONAL_CONSTANT * this.mass) / (displacement * displacement);
 
+//		double spaceObjectDirection = spaceObject.getPosition().subtract(this.position)
+//				.angle(spaceObject.getPosition())  * (Math.PI / 180);
 		double spaceObjectDirection = spaceObject.getPosition().subtract(this.position)
-				.angle(spaceObject.getPosition())  * (Math.PI / 180);
+				.angle(spaceObject.getPosition());
 		double deltaDirection = - (gravitationalForce * DELTA_TIME * Math.sin(spaceObjectDirection - direction))
 				/ Photon.SPEED_OF_LIGHT; // The direction the vector points
 
@@ -118,34 +119,35 @@ public class BlackHole {
 		spaceObjectDirection += deltaDirection;
 		
 		double spaceObjectMagnitude = spaceObject.getPosition().subtract(this.position).magnitude();
-		spaceObject.setSpeed(createVectorFromAngle(spaceObjectDirection, spaceObjectMagnitude));
-		spaceObject.setPosition(spaceObject.getPosition().subtract(spaceObject.getSpeed()));
+		spaceObject.setVelocity(createVectorFromAngle(spaceObjectDirection, spaceObjectMagnitude));
+		spaceObject.setPosition(spaceObject.getPosition().subtract(spaceObject.getVelocity()));
 
 		if (spaceObject instanceof Photon) {
-			spaceObject.setSpeed(new Point2D(Photon.SPEED_OF_LIGHT, Photon.SPEED_OF_LIGHT));
+			spaceObject.setVelocity(new Point2D(Photon.SPEED_OF_LIGHT, Photon.SPEED_OF_LIGHT));
 		}
 		
 		// Console output
-		System.out.println("spaceObject position:" + spaceObject.getPosition());
-		System.out.println("vel: " + spaceObject.getSpeed());
-		System.out.printf("spaceObject Direction: %.4f \n", spaceObjectDirection);
-		System.out.println();
-		System.out.println("black hole position: " + this.position);
-		System.out.println("black hole mass: " + this.mass);
-		System.out.println();
-
-		System.out.println("black hole distance: " + (this.position.distance(spaceObject.getPosition())));
-		System.out.println("event horizon: " + this.rs);
-
-		System.out.println("-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=");
+		String console = "-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-\n"
+				+ "Black hole:\n"
+				+ "\t- Mass: " + this.mass + "\n"
+				+ "\t- Position: " + this.position + "\n"
+				+ "SpaceObject:\n"
+				+ "\t- Position: " + spaceObject.getPosition() + "\n"
+				+ "\t- Velocity: " + spaceObject.getVelocity() + "\n"
+				+ "\t- Direction: " + String.format("%.4f\n", spaceObjectDirection)
+				+ "Result:\n"
+				+ "\t- Black hole event horizon: " + this.rs + "\n"
+				+ "\t- Distance from the black hole: " + (this.position.distance(spaceObject.getPosition())) + "\n"
+				+ "-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-";
+		System.out.println(console);
 		
 		// Stop conditions
 		if (this.position.distance(spaceObject.getPosition()) < this.rs) {
-			System.out.println("STOP");
+			System.out.println("Fell into the black hole");
 			return true;
 		}
 		if (Double.isInfinite(this.position.distance(spaceObject.getPosition()))) {
-			System.out.println("escapou");
+			System.out.println("Escaped to infinity");
 			return true;
 		}
 		

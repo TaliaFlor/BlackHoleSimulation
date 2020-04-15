@@ -1,3 +1,11 @@
+/* Application labels */
+.label {
+    -fx-font-size: 12.0px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow(gaussian, rgba(255.0,255.0,255.0,0.5), 0.0, 0.0, 0.0, 1.0);
+}
+
 /* Application buttons */
 .button {
     -fx-text-fill: white;

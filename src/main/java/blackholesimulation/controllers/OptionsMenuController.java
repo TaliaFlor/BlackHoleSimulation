@@ -32,13 +32,6 @@ public class OptionsMenuController {
 	// Choices
 	
 	@FXML
-	private void massiveBodyPlay(ActionEvent event) throws IOException {
-		simulationController = new SimulationController(SpaceBodies.MASSIVE_BODY);
-
-		openSimulation(event);
-	}
-
-	@FXML
 	private void asteroidPlay(ActionEvent event) throws IOException {
 		simulationController = new SimulationController(SpaceBodies.ASTEROID);
 

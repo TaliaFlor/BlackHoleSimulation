@@ -7,27 +7,27 @@ import javafx.geometry.Point2D;
 public abstract class SpaceObject {
 
 	private Point2D position;
-	private Point2D speed;
+	private Point2D velocity;
 	
 	
 
 	public SpaceObject(Point2D position, Point2D speed) {
 		this.position = position;
-		this.speed = speed;
+		this.velocity = speed;
 	}
 	
 	
 	
 	@Override
 	public String toString() {
-		return String.format("SpaceObject [position: %s, speed: %s]", position, speed);
+		return String.format("SpaceObject [position: %s, velocity: %s]", position, velocity);
 	}
 
 	@Override
 	public int hashCode() {
 		int hash = 5;
 		hash = 79 * hash + Objects.hashCode(this.position);
-		hash = 79 * hash + Objects.hashCode(this.speed);
+		hash = 79 * hash + Objects.hashCode(this.velocity);
 		return hash;
 	}
 
@@ -43,14 +43,14 @@ public abstract class SpaceObject {
 			return false;
 		}
 		final SpaceObject other = (SpaceObject) obj;
-		return Objects.equals(position, other.position) && Objects.equals(speed, other.speed);
+		return Objects.equals(position, other.position) && Objects.equals(velocity, other.velocity);
 	}
 	
 	
 
-	public Point2D getSpeed() { return speed; }
+	public Point2D getVelocity() { return velocity; }
 
-	public void setSpeed(Point2D speed) { this.speed = speed; }
+	public void setVelocity(Point2D speed) { this.velocity = speed; }
 
 	public Point2D getPosition() { return position; }
 
