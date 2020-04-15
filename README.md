@@ -42,6 +42,10 @@ Accretion Disk = Rs * 3
     - Star
     - Photons
 
+# Release
+
+    Stable version: v2.0
+
 # Source
 
 [Coding Challenge #144 - 2D Black Hole Visualization](https://thecodingtrain.com/CodingChallenges/144-black-hole-visualization.html)
