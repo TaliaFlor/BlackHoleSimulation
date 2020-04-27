@@ -12,6 +12,7 @@ import blackholesimulation.spaceobjects.Asteroid;
 import blackholesimulation.spaceobjects.Photon;
 import blackholesimulation.spaceobjects.Planet;
 import blackholesimulation.spaceobjects.Star;
+import blackholesimulation.spaceobjects.WhiteDwarf;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -24,6 +25,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
@@ -68,6 +72,8 @@ public class SimulationController implements Initializable {
 			showPlanet();
 		} else if (spaceBody == SpaceBodies.STAR) {
 			showStar();
+		} else if (spaceBody == SpaceBodies.WHITE_DWARF) {
+			showWhiteDwarf();
 		} else {
 			showPhotons();
 		} 
@@ -187,6 +193,20 @@ public class SimulationController implements Initializable {
 	private void showStar() {
 		spaceObjectView = new Circle(20, 350, 40, Color.web("#B8860B"));
 		spaceObject = new Star(new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()),
+				new Point2D(2, 2), 2000);
+
+		root.getChildren().add(spaceObjectView);
+	}
+	
+	private void showWhiteDwarf() {
+		RadialGradient fill = new RadialGradient(0, 0, 0.5037036895751953, 0.4873015630812872, 0.5, true,
+				CycleMethod.NO_CYCLE, new Stop(0, Color.WHITE), new Stop(0.5110795117904966, Color.web("#fffcfc")),
+				new Stop(1, Color.web("#cccccc")));
+
+		spaceObjectView = new Circle(20, 600, 25, fill);
+		spaceObjectView.setStroke(Color.web("#d4d4d4"));
+		
+		spaceObject = new WhiteDwarf(new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()),
 				new Point2D(2, 2), 2000);
 
 		root.getChildren().add(spaceObjectView);

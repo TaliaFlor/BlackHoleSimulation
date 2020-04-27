@@ -59,6 +59,13 @@ public class OptionsMenuController {
 		openSimulation(event);
 	}
 	
+	@FXML
+	private void whiteDwarfPlay(ActionEvent event) throws IOException {
+		simulationController = new SimulationController(SpaceBodies.WHITE_DWARF);
+
+		openSimulation(event);
+	}
+	
 
 	// Helper methods
 
