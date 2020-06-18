@@ -3,15 +3,10 @@ package blackholesimulation.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.ThreadLocalRandom;
-
 import blackholesimulation.enums.SpaceBodies;
 import blackholesimulation.space.BlackHole;
 import blackholesimulation.space.SpaceObject;
-import blackholesimulation.spaceobjects.Asteroid;
-import blackholesimulation.spaceobjects.Photon;
-import blackholesimulation.spaceobjects.Planet;
-import blackholesimulation.spaceobjects.Star;
+import blackholesimulation.utils.SpaceObjectFactory;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -40,8 +35,6 @@ public class SimulationController implements Initializable {
 	private SpaceObject spaceObject;
 	private Circle spaceObjectView;
 
-	private Circle blackCircle;
-
 	@FXML
 	private AnchorPane root;
 	@FXML
@@ -63,11 +56,11 @@ public class SimulationController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		// Draw nodes on screen
 		if (spaceBody == SpaceBodies.ASTEROID) {
-			showAsteroid();
+			show(SpaceBodies.ASTEROID);
 		} else if (spaceBody == SpaceBodies.PLANET) {
-			showPlanet();
+			show(SpaceBodies.PLANET);
 		} else if (spaceBody == SpaceBodies.STAR) {
-			showStar();
+			show(SpaceBodies.STAR);
 		} else {
 			showPhotons();
 		} 
@@ -80,7 +73,6 @@ public class SimulationController implements Initializable {
 		} else {
 			pullPhotons();
 		}
-
 	}
 	
 	
@@ -152,9 +144,16 @@ public class SimulationController implements Initializable {
 	
 
 	// Draw nodes on screen
+	
+	private void show(SpaceBodies type) {
+		spaceObjectView = SpaceObjectFactory.getSpaceObjectView(type);
+		spaceObject = SpaceObjectFactory.getSpaceObject(spaceObjectView, type);
+
+		root.getChildren().add(spaceObjectView);
+	}
 
 	private void showBlackCircle() {
-		blackCircle = new Circle(948, 232, 54, Color.BLACK);
+		Circle blackCircle = new Circle(948, 232, 54, Color.BLACK);
 		root.getChildren().add(blackCircle);
 	}
 
@@ -168,36 +167,11 @@ public class SimulationController implements Initializable {
 		blackHole.setPosition(new Point2D(eventHorizon.getLayoutX(), eventHorizon.getLayoutY()));
 	}
 
-	private void showAsteroid() {
-		spaceObjectView = new Circle(20, 650, 15, Color.web("#514531"));
-		spaceObject = new Asteroid(new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()),
-				new Point2D(2, 2), 100);
-
-		root.getChildren().add(spaceObjectView);
-	}
-
-	private void showPlanet() {
-		spaceObjectView = new Circle(20, 380, 20, Color.web("#836FFF"));
-		spaceObject = new Planet(new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()),
-				new Point2D(2, 2), 400);
-
-		root.getChildren().add(spaceObjectView);
-	}
-
-	private void showStar() {
-		spaceObjectView = new Circle(20, 350, 40, Color.web("#B8860B"));
-		spaceObject = new Star(new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()),
-				new Point2D(2, 2), 2000);
-
-		root.getChildren().add(spaceObjectView);
-	}
 
 	private void showPhotons() {
 		for (int i = 0; i < spaceObjectArray.length; i++) {
-			Circle spaceObjectView = new Circle(50, ThreadLocalRandom.current().nextDouble(380, 750), 2.5,
-					Color.web("#F0FFFF"));
-			SpaceObject spaceObject = new Photon(
-					new Point2D(spaceObjectView.getCenterX(), spaceObjectView.getCenterY()));
+			Circle spaceObjectView = SpaceObjectFactory.getSpaceObjectView(SpaceBodies.PHOTON);
+			SpaceObject spaceObject = SpaceObjectFactory.getSpaceObject(spaceObjectView, SpaceBodies.PHOTON);
 
 			spaceObjectViewArray[i] = spaceObjectView;
 			spaceObjectArray[i] = spaceObject;
