@@ -1,6 +1,8 @@
 # BlackHoleSimulation
 
-<img style="text-align:center" width="576" alt="Home screen" src="https://user-images.githubusercontent.com/47438099/118581883-cb496a00-b768-11eb-8194-4fc337e39d17.png">
+<div style="text-align:center">
+  <img width="576" alt="Home screen" src="https://user-images.githubusercontent.com/47438099/118581883-cb496a00-b768-11eb-8194-4fc337e39d17.png">
+</div>
 
 <p>
 Simulation of the physics of a Schwarzschild black hole, or static black hole. A static black hole is a black hole that has neither electric charge nor angular momentum. Schwarzschild black holes are the simplest kind of black hole and only theorical since in reallity all things are moving at all times.
@@ -13,7 +15,9 @@ This project is based on the relativistic version of a JavaScript with p5.js imp
 
 ### Structures of a black hole
 
-<img style="text-align:center" width="848" alt="Black hole" src="https://user-images.githubusercontent.com/47438099/118581656-5aa24d80-b768-11eb-8c60-6ce528fa5f34.png">
+<div style="text-align:center">
+  <img width="848" alt="Black hole" src="https://user-images.githubusercontent.com/47438099/118581656-5aa24d80-b768-11eb-8c60-6ce528fa5f34.png">
+</div>
 
 - **Event horizon:** the point from which no information can escape the black hole. It's radius is based on the black
   hole's mass with the origin on the center of the black hole (singularity) and given as follows:
@@ -41,7 +45,9 @@ Accretion Disk = Rs * 3
 
 # Features
 
-<img style="text-align:center" width="582" alt="Options screen" src="https://user-images.githubusercontent.com/47438099/118581954-f16f0a00-b768-11eb-8e90-22d7bb357c51.png">
+<div style="text-align:center">
+  <img width="582" alt="Options screen" src="https://user-images.githubusercontent.com/47438099/118581954-f16f0a00-b768-11eb-8e90-22d7bb357c51.png">
+</div>
 
 - Uses a simplified version of the real physics involved on the calculations.
 - Simulates attraction on:
