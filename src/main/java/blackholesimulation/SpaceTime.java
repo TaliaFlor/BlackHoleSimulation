@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class SpaceTime extends Application {
 
@@ -17,8 +18,7 @@ public class SpaceTime extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("view/fxmls/Inicial_View.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/fxmls/Inicial_View.fxml")));
 
         Scene scene = new Scene(root);
 

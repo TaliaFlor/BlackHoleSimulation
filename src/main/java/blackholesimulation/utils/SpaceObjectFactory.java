@@ -4,42 +4,87 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import blackholesimulation.enums.SpaceBodies;
 import blackholesimulation.space.SpaceObject;
-import blackholesimulation.spaceobjects.Asteroid;
-import blackholesimulation.spaceobjects.Photon;
-import blackholesimulation.spaceobjects.Planet;
-import blackholesimulation.spaceobjects.Star;
+import blackholesimulation.spaceobjects.*;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 
 public class SpaceObjectFactory {
+	private Circle view;
+	private SpaceObject spaceObject;
 
-	public static Circle getSpaceObjectView(SpaceBodies type) {
-		Circle view = null;
-		if (type == SpaceBodies.ASTEROID) {
-			view = new Circle(20, 650, 15, Color.web("#514531"));
-		} else if (type == SpaceBodies.PLANET) {
-			view = new Circle(20, 380, 20, Color.web("#836FFF"));
-		} else if (type == SpaceBodies.STAR) {
-			view = new Circle(20, 350, 40, Color.web("#B8860B"));
-		} else {	// Photon
-			view = new Circle(50, ThreadLocalRandom.current().nextDouble(380, 750), 2.5, Color.web("#F0FFFF"));
-		}
+
+	public SpaceObjectFactory(SpaceBodies type) {
+		createSpaceBody(type);
+	}
+
+
+	public Circle getSpaceObjectView() {
 		return view;
 	}
 
-	public static SpaceObject getSpaceObject(Circle view, SpaceBodies type) {
-		SpaceObject spaceObject = null;
-		if (type == SpaceBodies.ASTEROID) {
-			spaceObject = new Asteroid(new Point2D(view.getCenterX(), view.getCenterY()), new Point2D(2, 2), 100);
-		} else if (type == SpaceBodies.PLANET) {
-			spaceObject = new Planet(new Point2D(view.getCenterX(), view.getCenterY()), new Point2D(2, 2), 400);
-		} else if (type == SpaceBodies.STAR) {
-			spaceObject = new Star(new Point2D(view.getCenterX(), view.getCenterY()), new Point2D(2, 2), 2000);
-		} else {	// Photon
-			spaceObject = new Photon(new Point2D(view.getCenterX(), view.getCenterY()));
-		}
+	public SpaceObject getSpaceObject() {
 		return spaceObject;
+	}
+
+
+	// ========== HELPER METHODS ==========
+
+	private void createSpaceBody(SpaceBodies type) {
+		if (type == SpaceBodies.ASTEROID) {
+			createAsteroid();
+		} else if (type == SpaceBodies.PLANET) {
+			createPlanet();
+		} else if (type == SpaceBodies.STAR) {
+			createStar();
+		} else if (type == SpaceBodies.WHITE_DWARF) {
+			createWhiteDwarf();
+		} else {
+			createPhotons();
+		}
+	}
+
+	// === SpaceBodies
+	
+	private void createAsteroid() {
+		view = new Circle(20, 650, 15, Color.web("#514531"));
+		spaceObject = new Asteroid(new Point2D(view.getCenterX(), view.getCenterY()), new Point2D(2, 2), 100);
+	}
+
+	private void createPlanet() {
+		view = new Circle(20, 380, 20, Color.web("#836FFF"));
+		spaceObject = new Planet(new Point2D(view.getCenterX(), view.getCenterY()), new Point2D(2, 2), 400);
+	}
+
+	private void createStar() {
+		view = new Circle(20, 350, 40, Color.web("#B8860B"));
+		spaceObject = new Star(new Point2D(view.getCenterX(), view.getCenterY()), new Point2D(2, 2), 2000);
+	}
+
+	private void createWhiteDwarf() {
+		RadialGradient gradient = new RadialGradient(
+				0,
+				0,
+				0.5037036895751953,
+				0.4873015630812872,
+				0.5,
+				true,
+				CycleMethod.NO_CYCLE,
+				new Stop(0, Color.WHITE), new Stop(0.5110795117904966, Color.web("#fffcfc")),
+				new Stop(1, Color.web("#cccccc"))
+		);
+		view = new Circle(20, 600, 25, gradient);
+		view.setStroke(Color.web("#d4d4d4"));
+		
+		spaceObject = new WhiteDwarf(new Point2D(view.getCenterX(), view.getCenterY()), new Point2D(2, 2), 2000);
+	}
+
+	private void createPhotons() {
+		view = new Circle(50, ThreadLocalRandom.current().nextDouble(380, 750), 2.5, Color.web("#F0FFFF"));
+		spaceObject = new Photon(new Point2D(view.getCenterX(), view.getCenterY()));
 	}
 
 }
