@@ -135,12 +135,13 @@ public class SimulationController implements Initializable {
 		for (int i = 0; i < spaceObjectArray.length; i += PHOTONS_CHUNK) {
 			SpaceObject[] photonsChunck = Arrays.copyOfRange(spaceObjectArray, i,
 					Math.min(spaceObjectArray.length, i + PHOTONS_CHUNK));
-			Circle[] photonsViewChunck = Arrays.copyOfRange(spaceObjectViewArray, i,
-					Math.min(spaceObjectViewArray.length, i + PHOTONS_CHUNK));
+            Circle[] photonsViewChunck = Arrays.copyOfRange(spaceObjectViewArray, i,
+                    Math.min(spaceObjectViewArray.length, i + PHOTONS_CHUNK));
 
-			new Thread(new PhotonsExecuter(this, blackHole, photonsChunck, photonsViewChunck)).start();
-		}
-	}
+			Platform.runLater(new PhotonsExecuter(this, blackHole, photonsChunck, photonsViewChunck));
+//            new Thread(new PhotonsExecuter(this, blackHole, photonsChunck, photonsViewChunck)).start();
+        }
+    }
 
 	public boolean animation(Circle spaceObjectView, SpaceObject spaceObject) {
 		// Animate node
