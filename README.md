@@ -11,11 +11,13 @@ This project is based on the relativistic version of a JavaScript with p5.js imp
 
 ### Structures of a black hole
 
-- **Event horizon:** the point from which no information can escape the black hole. It's radius is based on the black hole's mass with the origin on the center of the black hole (singularity) and given as follows:
+- **Event horizon:** the point from which no information can escape the black hole. It's radius is based on the black
+  hole's mass with the origin on the center of the black hole (singularity) and given as follows:
 
 ```
 Rs = (2 * G * m) / c^2
 ```
+
 	Rs -> Radius (of Schwarzschild)
 	G -> Universal gravitational constant
 	m -> Mass of the black hole

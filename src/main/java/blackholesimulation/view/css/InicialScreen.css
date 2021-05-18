@@ -1,5 +1,5 @@
 @import url("ApplicationScreens.css");
 
 .anchor {
-    -fx-background-image:url('../images/inicialScreen.png');
+    -fx-background-image: url('../images/inicialScreen.png');
 }

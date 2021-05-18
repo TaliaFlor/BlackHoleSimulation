@@ -6,5 +6,5 @@ package blackholesimulation.enums;
  * </p>
  */
 public enum SpaceBodies {
-	PLANET, ASTEROID, STAR, WHITE_DWARF, PHOTON
+    PLANET, ASTEROID, STAR, WHITE_DWARF, PHOTON
 }

@@ -49,7 +49,6 @@ public class BlackHole {
     private double rs;
 
 
-
     /**
      * <p>
      * Creates a new black hole on the position (0, 0).
@@ -57,7 +56,9 @@ public class BlackHole {
      *
      * @param mass the mass of the black hole (measured in kilograms)
      */
-    public BlackHole(double mass) { this(new Point2D(0, 0), mass); }
+    public BlackHole(double mass) {
+        this(new Point2D(0, 0), mass);
+    }
 
     public BlackHole(Point2D position, double mass) {
         this.position = position;
@@ -65,7 +66,6 @@ public class BlackHole {
 //		this.rs = mass * 1.48428 * Math.pow(10, -27); // metros
         this.rs = (2 * UNIVERSAL_GRAVITATIONAL_CONSTANT * mass) / Math.pow(Photon.SPEED_OF_LIGHT, 2); // metros
     }
-    
 
 
     @Override
@@ -96,43 +96,41 @@ public class BlackHole {
         BlackHole other = (BlackHole) obj;
         return mass == other.mass && rs == other.rs;
     }
-    
 
-    
-	public boolean pull(SpaceObject spaceObject) {
-		Point2D force = position.subtract(spaceObject.getPosition());	// Black hole direction vector
-		double direction = force.angle(this.position) * (Math.PI / 180); // direction vector on radians
-		double displacement = force.magnitude();
-		double gravitationalForce = (UNIVERSAL_GRAVITATIONAL_CONSTANT * this.mass) / (displacement * displacement);
+
+    public boolean pull(SpaceObject spaceObject) {
+        Point2D force = position.subtract(spaceObject.getPosition());    // Black hole direction vector
+        double direction = force.angle(this.position) * (Math.PI / 180); // direction vector on radians
+        double displacement = force.magnitude();
+        double gravitationalForce = (UNIVERSAL_GRAVITATIONAL_CONSTANT * this.mass) / (displacement * displacement);
 
 //		double spaceObjectDirection = spaceObject.getPosition().subtract(this.position)
 //				.angle(spaceObject.getPosition())  * (Math.PI / 180);
-		double spaceObjectDirection = spaceObject.getPosition().subtract(this.position)
-				.angle(spaceObject.getPosition());
-		double deltaDirection = - (gravitationalForce * DELTA_TIME * Math.sin(spaceObjectDirection - direction))
-				/ Photon.SPEED_OF_LIGHT; // The direction the vector points
+        double spaceObjectDirection = spaceObject.getPosition().subtract(this.position)
+                .angle(spaceObject.getPosition());
+        double deltaDirection = -(gravitationalForce * DELTA_TIME * Math.sin(spaceObjectDirection - direction))
+                / Photon.SPEED_OF_LIGHT; // The direction the vector points
 
 //		deltaDirection /= Math.abs(1 - ((2 * UNIVERSAL_GRAVITATIONAL_CONSTANT * mass) / (displacement * Math.pow(Photon.SPEED_OF_LIGHT, 2))));
-		deltaDirection /= Math.abs(1 - (rs / displacement));
-		
-		spaceObjectDirection += deltaDirection;
-		
-		double spaceObjectMagnitude = spaceObject.getPosition().subtract(this.position).magnitude();
-		spaceObject.setVelocity(createVectorFromAngle(spaceObjectDirection, spaceObjectMagnitude));
-		spaceObject.setPosition(spaceObject.getPosition().subtract(spaceObject.getVelocity()));
-		
-		// Mantains photon speed constant
-		if (spaceObject instanceof Photon) {
-			spaceObject.setVelocity(new Point2D(Photon.SPEED_OF_LIGHT, Photon.SPEED_OF_LIGHT));
-		}
-		
-		// consoleOutput(spaceObject, spaceObjectDirection);
-		
-		return stopped(spaceObject);
-	}
+        deltaDirection /= Math.abs(1 - (rs / displacement));
+
+        spaceObjectDirection += deltaDirection;
+
+        double spaceObjectMagnitude = spaceObject.getPosition().subtract(this.position).magnitude();
+        spaceObject.setVelocity(createVectorFromAngle(spaceObjectDirection, spaceObjectMagnitude));
+        spaceObject.setPosition(spaceObject.getPosition().subtract(spaceObject.getVelocity()));
+
+        // Mantains photon speed constant
+        if (spaceObject instanceof Photon) {
+            spaceObject.setVelocity(new Point2D(Photon.SPEED_OF_LIGHT, Photon.SPEED_OF_LIGHT));
+        }
+
+        // consoleOutput(spaceObject, spaceObjectDirection);
+
+        return stopped(spaceObject);
+    }
 
 
-	
     /**
      * <p>
      * Creates a new Point2D object from a given angle and magnitude. Equivalent to,
@@ -149,58 +147,58 @@ public class BlackHole {
 
         return new Point2D(x, y);
     }
-    
+
     /**
-	 * <p>
-	 * Write output to console.
-	 * </p>
-	 * 
-	 * @param spaceObject          the SpaceObject instance
-	 * @param spaceObjectDirection the direction in which the SpaceObject is going
-	 */
-	private void consoleOutput(SpaceObject spaceObject, double spaceObjectDirection) {
-		String console = "-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-\n"
-				+ "Black hole:\n"
-				+ "\t- Mass: " + this.mass + "\n"
-				+ "\t- Position: " + this.position + "\n"
-				+ "SpaceObject:\n"
-				+ "\t- Position: " + spaceObject.getPosition() + "\n"
-				+ "\t- Velocity: " + spaceObject.getVelocity() + "\n"
-				+ "\t- Direction: " + String.format("%.4f\n", spaceObjectDirection)
-				+ "Result:\n"
-				+ "\t- Black hole event horizon: " + this.rs + "\n"
-				+ "\t- Distance from the black hole: " + (this.position.distance(spaceObject.getPosition())) + "\n"
-				+ "-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-";
-		System.out.println(console);
-	}
-    
-	/**
-	 * <p>
-	 * Wheter the conditions to stop the calculations have been reached.
-	 * </p>
-	 * 
-	 * @param spaceObject
-	 * @return whether the object has stopped or not
-	 */
-	private boolean stopped(SpaceObject spaceObject) {
-		if (this.position.distance(spaceObject.getPosition()) < this.rs) {
+     * <p>
+     * Write output to console.
+     * </p>
+     *
+     * @param spaceObject          the SpaceObject instance
+     * @param spaceObjectDirection the direction in which the SpaceObject is going
+     */
+    private void consoleOutput(SpaceObject spaceObject, double spaceObjectDirection) {
+        String console = "-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-\n"
+                + "Black hole:\n"
+                + "\t- Mass: " + this.mass + "\n"
+                + "\t- Position: " + this.position + "\n"
+                + "SpaceObject:\n"
+                + "\t- Position: " + spaceObject.getPosition() + "\n"
+                + "\t- Velocity: " + spaceObject.getVelocity() + "\n"
+                + "\t- Direction: " + String.format("%.4f\n", spaceObjectDirection)
+                + "Result:\n"
+                + "\t- Black hole event horizon: " + this.rs + "\n"
+                + "\t- Distance from the black hole: " + (this.position.distance(spaceObject.getPosition())) + "\n"
+                + "-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-";
+        System.out.println(console);
+    }
+
+    /**
+     * <p>
+     * Wheter the conditions to stop the calculations have been reached.
+     * </p>
+     *
+     * @param spaceObject
+     * @return whether the object has stopped or not
+     */
+    private boolean stopped(SpaceObject spaceObject) {
+        if (this.position.distance(spaceObject.getPosition()) < this.rs) {
 //			System.out.println("Fell into the black hole");
-			return true;
-		}
-		if (Double.isInfinite(this.position.distance(spaceObject.getPosition()))) {
-//			System.out.println("Escaped to infinity");
-			return true;
-		}
-		return false;
-	}
+            return true;
+        }
+        //			System.out.println("Escaped to infinity");
+        return Double.isInfinite(this.position.distance(spaceObject.getPosition()));
+    }
 
-    public double getDeltaTime() { return DELTA_TIME; }
+    public double getDeltaTime() {
+        return DELTA_TIME;
+    }
 
-    
 
     // Black hole structures
 
-    public double getPhotonSphere() { return rs * 1.5; }
+    public double getPhotonSphere() {
+        return rs * 1.5;
+    }
 
     /**
      * <p>
@@ -209,23 +207,39 @@ public class BlackHole {
      *
      * @return the ISCO value
      */
-    public double getInnermostStableCircularOrbit() { return rs * 3; }
+    public double getInnermostStableCircularOrbit() {
+        return rs * 3;
+    }
 
-    public double getPhotonScapeDistance() { return rs * 2.6; }
+    public double getPhotonScapeDistance() {
+        return rs * 2.6;
+    }
 
 
     // Getters e setters
 
-    public Point2D getPosition() { return position; }
+    public Point2D getPosition() {
+        return position;
+    }
 
-    public void setPosition(Point2D position) { this.position = position; }
+    public void setPosition(Point2D position) {
+        this.position = position;
+    }
 
-    public double getMass() { return mass; }
+    public double getMass() {
+        return mass;
+    }
 
-    public void setMass(double mass) { this.mass = mass; }
+    public void setMass(double mass) {
+        this.mass = mass;
+    }
 
-    public double getRs() { return rs; }
+    public double getRs() {
+        return rs;
+    }
 
-    public void setRs(double rs) { this.rs = rs; }
+    public void setRs(double rs) {
+        this.rs = rs;
+    }
 
 }

@@ -141,7 +141,7 @@ public class SimulationController implements Initializable {
             Circle[] photonsViewChunck = Arrays.copyOfRange(spaceObjectViewArray, i,
                     Math.min(spaceObjectViewArray.length, i + PHOTONS_CHUNK));
 
-			Platform.runLater(new PhotonsExecuter(this, blackHole, photonsChunck, photonsViewChunck));
+            Platform.runLater(new PhotonsExecuter(this, blackHole, photonsChunck, photonsViewChunck));
 //            new Thread(new PhotonsExecuter(this, blackHole, photonsChunck, photonsViewChunck)).start();
         }
     }
@@ -166,11 +166,8 @@ public class SimulationController implements Initializable {
     private boolean isBeyondScreen(Circle spaceObjectView) {
         double width = root.getWidth();
         double height = root.getHeight();
-        if (spaceObjectView.getCenterX() <= width || spaceObjectView.getCenterY() <= height) {
-//			System.out.println("Node is beyond screen");
-            return true;
-        }
-        return false;
+        //			System.out.println("Node is beyond screen");
+        return spaceObjectView.getCenterX() <= width || spaceObjectView.getCenterY() <= height;
     }
 
 

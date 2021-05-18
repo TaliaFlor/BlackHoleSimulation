@@ -3,7 +3,7 @@
     -fx-font-size: 12.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
-    -fx-effect: dropshadow(gaussian, rgba(255.0,255.0,255.0,0.5), 0.0, 0.0, 0.0, 1.0);
+    -fx-effect: dropshadow(gaussian, rgba(255.0, 255.0, 255.0, 0.5), 0.0, 0.0, 0.0, 1.0);
 }
 
 /* Application buttons */
@@ -11,7 +11,7 @@
     -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
-    
+
     -fx-background-color: linear-gradient(#6495ED, #9F79EE);
     -fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 0.6), 5.0, 0.0, 0.0, 1.0);
     -fx-border-radius: 2.0px;

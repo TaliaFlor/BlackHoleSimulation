@@ -2,55 +2,59 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Ellipse?>
-
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="750.0" prefWidth="900.0" styleClass="simulation" stylesheets="@../css/SimulationScreen.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-	<children>
-		<Ellipse fx:id="accretionDisk" fill="#1e75bd00" layoutX="948.0" layoutY="232.0" radiusX="115.0" radiusY="105.0" strokeType="OUTSIDE" strokeWidth="7.0">
-			<stroke>
-				<LinearGradient endX="1.0" endY="0.6374045801526718" startX="0.6641221888192738" startY="1.0">
-					<stops>
-						<Stop color="#d077d5" />
-						<Stop color="#4b104f" offset="0.9961832061068702" />
-						<Stop color="#4b104f" offset="1.0" />
-					</stops>
-				</LinearGradient>
-			</stroke>
-		</Ellipse>
-		<Ellipse fx:id="photonSphere" fill="#1e75bd00" layoutX="948.0" layoutY="231.0" radiusX="62.0" radiusY="60.0" strokeType="OUTSIDE">
-			<stroke>
-				<LinearGradient endX="1.0" endY="0.6374045801526718" startX="0.6641221888192738" startY="1.0">
-					<stops>
-						<Stop color="#f5fffc" />
-						<Stop color="#b9c287" offset="1.0" />
-					</stops>
-				</LinearGradient>
-			</stroke>
-		</Ellipse>
-		<Button layoutX="36.0" layoutY="25.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="119.0" text="Voltar" />
-		<Circle fx:id="eventHorizon" layoutX="948.0" layoutY="232.0" radius="44.0" strokeType="INSIDE" strokeWidth="2.0">
-			<stroke>
-				<LinearGradient endX="0.8320610832622033" endY="0.5114504035192592" startY="0.9961832051968756">
-					<stops>
-						<Stop color="#5c5c5a" />
-						<Stop color="#2e2e29" offset="1.0" />
-					</stops>
-				</LinearGradient>
-			</stroke>
-		</Circle>
-<!--       <Circle layoutX="107.0" layoutY="575.0" radius="34.0" stroke="#d4d4d4" strokeType="INSIDE">
-         <fill>
-            <RadialGradient centerX="0.5037036895751953" centerY="0.4873015630812872" radius="0.5">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="#fffcfc" offset="0.5110795117904966" />
-                  <Stop color="#cccccc" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Circle> -->
-	</children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" fx:id="root" prefHeight="750.0" prefWidth="900.0"
+            styleClass="simulation" stylesheets="@../css/SimulationScreen.css"
+            xmlns="http://javafx.com/javafx/8.0.171">
+    <children>
+        <Ellipse fx:id="accretionDisk" fill="#1e75bd00" layoutX="948.0" layoutY="232.0" radiusX="115.0" radiusY="105.0"
+                 strokeType="OUTSIDE" strokeWidth="7.0">
+            <stroke>
+                <LinearGradient endX="1.0" endY="0.6374045801526718" startX="0.6641221888192738" startY="1.0">
+                    <stops>
+                        <Stop color="#d077d5"/>
+                        <Stop color="#4b104f" offset="0.9961832061068702"/>
+                        <Stop color="#4b104f" offset="1.0"/>
+                    </stops>
+                </LinearGradient>
+            </stroke>
+        </Ellipse>
+        <Ellipse fx:id="photonSphere" fill="#1e75bd00" layoutX="948.0" layoutY="231.0" radiusX="62.0" radiusY="60.0"
+                 strokeType="OUTSIDE">
+            <stroke>
+                <LinearGradient endX="1.0" endY="0.6374045801526718" startX="0.6641221888192738" startY="1.0">
+                    <stops>
+                        <Stop color="#f5fffc"/>
+                        <Stop color="#b9c287" offset="1.0"/>
+                    </stops>
+                </LinearGradient>
+            </stroke>
+        </Ellipse>
+        <Button layoutX="36.0" layoutY="25.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0"
+                prefWidth="119.0" text="Voltar"/>
+        <Circle fx:id="eventHorizon" layoutX="948.0" layoutY="232.0" radius="44.0" strokeType="INSIDE"
+                strokeWidth="2.0">
+            <stroke>
+                <LinearGradient endX="0.8320610832622033" endY="0.5114504035192592" startY="0.9961832051968756">
+                    <stops>
+                        <Stop color="#5c5c5a"/>
+                        <Stop color="#2e2e29" offset="1.0"/>
+                    </stops>
+                </LinearGradient>
+            </stroke>
+        </Circle>
+        <!--       <Circle layoutX="107.0" layoutY="575.0" radius="34.0" stroke="#d4d4d4" strokeType="INSIDE">
+                 <fill>
+                    <RadialGradient centerX="0.5037036895751953" centerY="0.4873015630812872" radius="0.5">
+                       <stops>
+                          <Stop color="WHITE" />
+                          <Stop color="#fffcfc" offset="0.5110795117904966" />
+                          <Stop color="#cccccc" offset="1.0" />
+                       </stops>
+                    </RadialGradient>
+                 </fill>
+              </Circle> -->
+    </children>
 </AnchorPane>
